@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Barberia</string>
+    <string name="titulo_app">RESERVAR TURNO</string>
+    <string name="subtitulo_fecha">Selecciona una Fecha</string>
+    <string name="btn_confirmar">CONFIRMAR TURNO</string>
+    <string name="volver">Volver</string>
+</resources>
