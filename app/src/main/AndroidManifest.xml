@@ -10,16 +10,33 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Barberia">
+        android:theme="@style/Theme.Barberia"
+        tools:targetApi="31">
+
+        <!--
+            Pantalla inicial de la aplicación.
+            Tiene el intent-filter MAIN/LAUNCHER porque será la primera
+            pantalla que se muestra al abrir la app.
+        -->
         <activity
-            android:name=".MainActivity"
+            android:name=".InicioActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+        <!--
+            Pantalla de reserva creada en el TP1.
+            Se abre desde InicioActivity al tocar "Reservar turno".
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

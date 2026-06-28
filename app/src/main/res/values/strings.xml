@@ -1,7 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Barberia</string>
-    <string name="titulo_app">RESERVAR TURNO</string>
-    <string name="subtitulo_fecha">Selecciona una Fecha</string>
-    <string name="btn_confirmar">CONFIRMAR TURNO</string>
-    <string name="volver">Volver</string>
+
+    <!-- Nombre general de la aplicación -->
+    <string name="app_name">Barbería</string>
+
+    <!-- Textos utilizados en la pantalla inicial -->
+    <string name="titulo_inicio">BARBERÍA ELITE</string>
+    <string name="bienvenida_inicio">Tu estilo, tu momento.</string>
+    <string name="subtitulo_inicio">Reservá tu turno de forma rápida, simple y segura.</string>
+    <string name="boton_reservar_turno">Reservar turno</string>
+    <string name="boton_mis_turnos">Mis turnos</string>
+    <string name="descripcion_imagen_inicio">Imagen representativa de una barbería</string>
+    <string name="footer_inicio">Elegí tu servicio y reservá en pocos pasos.</string>
+    <string name="mensaje_mis_turnos_proximamente">La sección Mis turnos estará disponible próximamente.</string>
+
+    <!-- Texto del botón para regresar a la pantalla principal -->
+    <string name="boton_volver_inicio">← Volver al inicio</string>
+
 </resources>

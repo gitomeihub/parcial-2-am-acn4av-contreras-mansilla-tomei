@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Colores que ya utilizaba la pantalla de reserva del TP1 -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dorado_barberia">#D4AF37</color>
     <color name="negro_fondo">#121212</color>
     <color name="gris_oscuro">#333333</color>
+
+    <!-- Colores agregados para las nuevas pantallas del TP2 -->
+    <color name="barber_color_fondo">#101010</color>
+    <color name="barber_color_tarjeta">#2A2A2A</color>
+    <color name="barber_color_dorado">#D4AF37</color>
+    <color name="barber_color_texto">#F5F5F5</color>
+    <color name="barber_color_texto_secundario">#C8C8C8</color>
+
 </resources>

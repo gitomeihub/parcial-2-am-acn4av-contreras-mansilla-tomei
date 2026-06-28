@@ -17,6 +17,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Botón para volver a la pantalla principal de la aplicación.
+        Button btnVolverInicio = findViewById(R.id.btnVolverInicio);
+
+        /*
+         * Cierra la pantalla de reserva actual.
+         * Como esta activity fue abierta desde InicioActivity,
+         * al cerrarla se vuelve automáticamente a la pantalla de inicio.
+         */
+        btnVolverInicio.setOnClickListener(v -> finish());
+
         // 1. LÓGICA DE FECHAS (CARRUSEL)
         android.widget.LinearLayout layoutFechas = findViewById(R.id.layoutFechasDinamico);
         String[] fechas = {"Lun\n13", "Mar\n14", "Mié\n15", "Jue\n16", "Vie\n17", "Sáb\n18"};

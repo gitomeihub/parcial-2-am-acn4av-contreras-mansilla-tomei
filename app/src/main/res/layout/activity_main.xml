@@ -13,7 +13,17 @@
         android:paddingBottom="20dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp">
-
+        <!-- Botón para volver a la pantalla principal de la aplicación -->
+        <Button
+            android:id="@+id/btnVolverInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginBottom="18dp"
+            android:backgroundTint="@color/gris_oscuro"
+            android:text="@string/boton_volver_inicio"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

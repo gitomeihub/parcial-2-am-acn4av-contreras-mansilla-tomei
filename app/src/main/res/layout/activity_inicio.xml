@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/barber_color_fondo"
+    tools:context=".InicioActivity">
+
+    <!-- Línea decorativa superior -->
+    <View
+        android:id="@+id/vistaDoradaSuperior"
+        android:layout_width="0dp"
+        android:layout_height="6dp"
+        android:background="@color/barber_color_dorado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Contenedor principal de la pantalla -->
+    <LinearLayout
+        android:id="@+id/contenedorInicio"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="28dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vistaDoradaSuperior">
+
+        <!-- Nombre principal de la barbería -->
+        <TextView
+            android:id="@+id/txtTituloInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:letterSpacing="0.08"
+            android:text="@string/titulo_inicio"
+            android:textColor="@color/barber_color_dorado"
+            android:textSize="29sp"
+            android:textStyle="bold" />
+
+        <!-- Separador visual debajo del título -->
+        <View
+            android:id="@+id/lineaTituloInicio"
+            android:layout_width="72dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/barber_color_dorado" />
+
+        <!-- Imagen representativa de la barbería -->
+        <ImageView
+            android:id="@+id/imgInicio"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="28dp"
+            android:contentDescription="@string/descripcion_imagen_inicio"
+            android:scaleType="centerCrop"
+            android:src="@drawable/barberia1" />
+
+        <!-- Mensaje principal -->
+        <TextView
+            android:id="@+id/txtBienvenidaInicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:gravity="center"
+            android:text="@string/bienvenida_inicio"
+            android:textColor="@color/barber_color_texto"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <!-- Descripción de la aplicación -->
+        <TextView
+            android:id="@+id/txtSubtituloInicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:lineSpacingExtra="3dp"
+            android:text="@string/subtitulo_inicio"
+            android:textColor="@color/barber_color_texto_secundario"
+            android:textSize="15sp" />
+
+        <!-- Botón principal: lleva a reservar turno -->
+        <Button
+            android:id="@+id/btnReservarDesdeInicio"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:backgroundTint="@color/barber_color_dorado"
+            android:text="@string/boton_reservar_turno"
+            android:textAllCaps="false"
+            android:textColor="@color/barber_color_fondo"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <!-- Botón secundario: muestra los turnos reservados -->
+        <Button
+            android:id="@+id/btnMisTurnos"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="@color/barber_color_tarjeta"
+            android:text="@string/boton_mis_turnos"
+            android:textAllCaps="false"
+            android:textColor="@color/barber_color_texto"
+            android:textSize="17sp" />
+
+        <!-- Texto final informativo -->
+        <TextView
+            android:id="@+id/txtFooterInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:gravity="center"
+            android:text="@string/footer_inicio"
+            android:textColor="@color/barber_color_texto_secundario"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
