@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class InicioActivity extends AppCompatActivity {
 
-    // Botones principales de la pantalla de inicio.
+    // Botones principales de la pantalla inicial.
     private Button btnReservarDesdeInicio;
     private Button btnMisTurnos;
 
@@ -24,24 +24,27 @@ public class InicioActivity extends AppCompatActivity {
         btnMisTurnos = findViewById(R.id.btnMisTurnos);
 
         /*
-         * Abre la pantalla de reserva que ya existía en el TP1.
+         * Antes de reservar, el cliente debe cargar sus datos.
+         * Luego DatosClienteActivity abre la pantalla de reserva.
          */
         btnReservarDesdeInicio.setOnClickListener(view -> {
             Intent intent = new Intent(
                     InicioActivity.this,
-                    MainActivity.class
+                    DatosClienteActivity.class
             );
+
             startActivity(intent);
         });
 
         /*
-         * Abre la pantalla donde se mostrarán las reservas confirmadas.
+         * Abre la pantalla donde se muestran las reservas confirmadas.
          */
         btnMisTurnos.setOnClickListener(view -> {
             Intent intent = new Intent(
                     InicioActivity.this,
                     MisTurnosActivity.class
             );
+
             startActivity(intent);
         });
     }

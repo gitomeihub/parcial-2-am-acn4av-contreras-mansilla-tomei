@@ -14,45 +14,87 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     /*
-     * Variables donde se guardan las opciones elegidas por el usuario.
-     * Luego se envían a ResumenTurnoActivity mediante Intent extras.
+     * Datos elegidos para la reserva.
+     * Se enviarán luego a ResumenTurnoActivity.
      */
     private String fechaSeleccionada = "";
     private String horarioSeleccionado = "";
     private String servicioSeleccionado = "";
     private String precioSeleccionado = "";
 
+    /*
+     * Datos del cliente recibidos desde DatosClienteActivity.
+     * Acompañan el turno hasta que se guarda en Mis turnos.
+     */
+    private String nombreCliente = "";
+    private String dniCliente = "";
+    private String telefonoCliente = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Vincula esta activity con el layout de la pantalla de reserva.
+        // Vincula esta activity con la pantalla activity_main.xml.
         setContentView(R.layout.activity_main);
 
-        // Configura el botón para regresar a la pantalla principal.
-        configurarBotonVolverInicio();
+        /*
+         * Recupera los datos enviados desde DatosClienteActivity.
+         */
+        Intent intentRecibido = getIntent();
 
-        // Configura las opciones de reserva.
+        nombreCliente = intentRecibido.getStringExtra("NOMBRE_CLIENTE");
+        dniCliente = intentRecibido.getStringExtra("DNI_CLIENTE");
+        telefonoCliente = intentRecibido.getStringExtra("TELEFONO_CLIENTE");
+
+        /*
+         * Valores de respaldo para evitar errores si la pantalla
+         * se abre directamente durante una prueba.
+         */
+        if (nombreCliente == null) {
+            nombreCliente = "";
+        }
+
+        if (dniCliente == null) {
+            dniCliente = "";
+        }
+
+        if (telefonoCliente == null) {
+            telefonoCliente = "";
+        }
+
+        // Configura la navegación y las opciones de reserva.
+        configurarBotonVolverInicio();
         configurarFechas();
         configurarHorarios();
         configurarServicios();
-
-        // Configura el botón final que lleva al resumen.
         configurarBotonConfirmar();
     }
 
     /*
-     * Cierra la pantalla de reserva.
-     * Como se abrió desde InicioActivity, vuelve automáticamente al inicio.
+     * Regresa directamente a InicioActivity.
+     * Los flags evitan que se acumulen pantallas en el historial.
      */
     private void configurarBotonVolverInicio() {
         Button btnVolverInicio = findViewById(R.id.btnVolverInicio);
 
-        btnVolverInicio.setOnClickListener(v -> finish());
+        btnVolverInicio.setOnClickListener(v -> {
+            Intent intentInicio = new Intent(
+                    MainActivity.this,
+                    InicioActivity.class
+            );
+
+            intentInicio.addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            | Intent.FLAG_ACTIVITY_SINGLE_TOP
+            );
+
+            startActivity(intentInicio);
+            finish();
+        });
     }
 
     /*
-     * Crea los botones de fecha de forma dinámica.
+     * Crea las fechas disponibles de forma dinámica.
      * La primera fecha aparece seleccionada por defecto.
      */
     private void configurarFechas() {
@@ -67,13 +109,13 @@ public class MainActivity extends AppCompatActivity {
                 "Sáb\n18"
         };
 
-        // Se guarda la primera fecha porque inicia seleccionada visualmente.
+        // La primera fecha inicia marcada visualmente.
         fechaSeleccionada = fechas[0].replace("\n", " ");
 
         for (int i = 0; i < fechas.length; i++) {
             Button btnFecha = new Button(this);
 
-            // Versión legible que se utilizará en la pantalla de resumen.
+            // Versión legible que luego se mostrará en el resumen.
             String fechaActual = fechas[i].replace("\n", " ");
 
             btnFecha.setText(fechas[i]);
@@ -85,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             params.setMargins(0, 0, 20, 0);
             btnFecha.setLayoutParams(params);
 
-            // La primera fecha queda marcada; las demás empiezan sin seleccionar.
+            // La primera fecha empieza seleccionada.
             if (i == 0) {
                 btnFecha.setBackgroundColor(Color.parseColor("#D4AF37"));
                 btnFecha.setTextColor(Color.BLACK);
@@ -95,10 +137,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             btnFecha.setOnClickListener(v -> {
-                /*
-                 * Se reinician todos los botones para que el usuario
-                 * pueda tener solamente una fecha seleccionada.
-                 */
+                // Restaura visualmente todas las fechas.
                 for (int j = 0; j < layoutFechas.getChildCount(); j++) {
                     Button botonHermano =
                             (Button) layoutFechas.getChildAt(j);
@@ -110,11 +149,11 @@ public class MainActivity extends AppCompatActivity {
                     botonHermano.setTextColor(Color.WHITE);
                 }
 
-                // Se resalta la fecha elegida.
+                // Resalta la fecha elegida.
                 btnFecha.setBackgroundColor(Color.parseColor("#D4AF37"));
                 btnFecha.setTextColor(Color.BLACK);
 
-                // Se almacena la fecha elegida.
+                // Guarda la selección.
                 fechaSeleccionada = fechaActual;
             });
 
@@ -123,8 +162,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-     * Crea los botones de horarios de forma dinámica.
-     * El usuario debe elegir un horario para avanzar.
+     * Crea los horarios disponibles de forma dinámica.
      */
     private void configurarHorarios() {
         GridLayout layoutHorarios = findViewById(R.id.layoutHorariosDinamico);
@@ -142,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < horarios.length; i++) {
             Button btnHora = new Button(this);
-
             String horarioActual = horarios[i];
 
             btnHora.setText(horarioActual);
@@ -161,10 +198,7 @@ public class MainActivity extends AppCompatActivity {
             btnHora.setTextColor(Color.parseColor("#D4AF37"));
 
             btnHora.setOnClickListener(v -> {
-                /*
-                 * Se restablecen todos los horarios antes de marcar
-                 * el que el usuario acaba de seleccionar.
-                 */
+                // Restaura todos los horarios antes de marcar uno.
                 for (int j = 0; j < layoutHorarios.getChildCount(); j++) {
                     Button botonHermano =
                             (Button) layoutHorarios.getChildAt(j);
@@ -178,11 +212,10 @@ public class MainActivity extends AppCompatActivity {
                     );
                 }
 
-                // Se destaca el horario seleccionado.
+                // Resalta y guarda el horario elegido.
                 btnHora.setBackgroundColor(Color.parseColor("#D4AF37"));
                 btnHora.setTextColor(Color.BLACK);
 
-                // Se almacena el horario elegido.
                 horarioSeleccionado = horarioActual;
             });
 
@@ -191,8 +224,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-     * Configura las tarjetas de servicios que ya están creadas en el XML.
-     * Cada tarjeta se vincula con su nombre y precio correspondientes.
+     * Configura las tarjetas de servicios ya definidas en el XML.
      */
     private void configurarServicios() {
         LinearLayout layoutServicios =
@@ -217,24 +249,21 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < layoutServicios.getChildCount(); i++) {
             View servicioCard = layoutServicios.getChildAt(i);
 
-            /*
-             * Se guarda el índice porque cada tarjeta debe recuperar
-             * el nombre y precio que coinciden con su posición.
-             */
+            // Guarda el índice para identificar servicio y precio.
             int indiceServicio = i;
 
             servicioCard.setOnClickListener(v -> {
-                // Se reinician visualmente todas las tarjetas.
+                // Restaura todas las tarjetas.
                 for (int j = 0; j < layoutServicios.getChildCount(); j++) {
                     layoutServicios.getChildAt(j).setBackgroundColor(
                             Color.parseColor("#2A2A2A")
                     );
                 }
 
-                // Se resalta la tarjeta elegida.
+                // Destaca la tarjeta seleccionada.
                 v.setBackgroundColor(Color.parseColor("#D4AF37"));
 
-                // Se guardan los datos del servicio seleccionado.
+                // Guarda servicio y precio elegidos.
                 servicioSeleccionado = servicios[indiceServicio];
                 precioSeleccionado = precios[indiceServicio];
             });
@@ -242,16 +271,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-     * Valida que el usuario haya elegido horario y servicio.
-     * Luego envía todos los datos de la reserva a ResumenTurnoActivity.
+     * Valida las elecciones y envía todos los datos al resumen.
      */
     private void configurarBotonConfirmar() {
         Button btnConfirmar = findViewById(R.id.btnConfirmarTurno);
 
         btnConfirmar.setOnClickListener(v -> {
 
+            boolean faltanDatosCliente =
+                    nombreCliente.isEmpty()
+                            || dniCliente.isEmpty()
+                            || telefonoCliente.isEmpty();
+
             boolean faltaHorario = horarioSeleccionado.isEmpty();
             boolean faltaServicio = servicioSeleccionado.isEmpty();
+
+            /*
+             * El flujo normal obliga a cargar datos antes de reservar.
+             * Esta validación evita confirmar un turno sin cliente.
+             */
+            if (faltanDatosCliente) {
+                Toast.makeText(
+                        this,
+                        getString(R.string.mensaje_error_datos_cliente),
+                        Toast.LENGTH_LONG
+                ).show();
+
+                return;
+            }
 
             if (faltaHorario || faltaServicio) {
                 Toast.makeText(
@@ -264,20 +311,24 @@ public class MainActivity extends AppCompatActivity {
             }
 
             /*
-             * Intent permite abrir otra Activity.
-             * Los extras transportan los datos reales de la reserva.
+             * Abre la pantalla resumen y transporta cliente + turno
+             * mediante Intent extras.
              */
-            Intent intent = new Intent(
+            Intent intentResumen = new Intent(
                     MainActivity.this,
                     ResumenTurnoActivity.class
             );
 
-            intent.putExtra("SERVICIO", servicioSeleccionado);
-            intent.putExtra("PRECIO", precioSeleccionado);
-            intent.putExtra("FECHA", fechaSeleccionada);
-            intent.putExtra("HORARIO", horarioSeleccionado);
+            intentResumen.putExtra("NOMBRE_CLIENTE", nombreCliente);
+            intentResumen.putExtra("DNI_CLIENTE", dniCliente);
+            intentResumen.putExtra("TELEFONO_CLIENTE", telefonoCliente);
 
-            startActivity(intent);
+            intentResumen.putExtra("SERVICIO", servicioSeleccionado);
+            intentResumen.putExtra("PRECIO", precioSeleccionado);
+            intentResumen.putExtra("FECHA", fechaSeleccionada);
+            intentResumen.putExtra("HORARIO", horarioSeleccionado);
+
+            startActivity(intentResumen);
         });
     }
 }

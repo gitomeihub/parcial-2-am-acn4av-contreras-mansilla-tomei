@@ -16,9 +16,8 @@ import org.json.JSONObject;
 public class ResumenTurnoActivity extends AppCompatActivity {
 
     /*
-     * Datos para guardar los turnos localmente en el dispositivo.
-     * SharedPreferences funciona como un pequeño almacenamiento interno
-     * de la aplicación.
+     * Constantes utilizadas para guardar y recuperar los turnos
+     * desde SharedPreferences.
      */
     private static final String PREFS_NAME = "barberia_prefs";
     private static final String KEY_TURNOS = "turnos_guardados";
@@ -30,74 +29,130 @@ public class ResumenTurnoActivity extends AppCompatActivity {
         // Vincula esta activity con activity_resumen_turno.xml.
         setContentView(R.layout.activity_resumen_turno);
 
-        // Referencias a los TextView donde se mostrarán los datos recibidos.
-        TextView txtServicioResumen = findViewById(R.id.txtServicioResumen);
-        TextView txtFechaResumen = findViewById(R.id.txtFechaResumen);
-        TextView txtHorarioResumen = findViewById(R.id.txtHorarioResumen);
-        TextView txtTotalResumen = findViewById(R.id.txtTotalResumen);
+        // Referencias a los datos del cliente.
+        TextView txtNombreClienteResumen =
+                findViewById(R.id.txtNombreClienteResumen);
 
-        // Referencias a los botones de la pantalla.
-        Button btnVolverReserva = findViewById(R.id.btnVolverReserva);
-        Button btnConfirmarReserva = findViewById(R.id.btnConfirmarReserva);
+        TextView txtDniClienteResumen =
+                findViewById(R.id.txtDniClienteResumen);
+
+        TextView txtTelefonoClienteResumen =
+                findViewById(R.id.txtTelefonoClienteResumen);
+
+        // Referencias a los datos de la reserva.
+        TextView txtServicioResumen =
+                findViewById(R.id.txtServicioResumen);
+
+        TextView txtFechaResumen =
+                findViewById(R.id.txtFechaResumen);
+
+        TextView txtHorarioResumen =
+                findViewById(R.id.txtHorarioResumen);
+
+        TextView txtTotalResumen =
+                findViewById(R.id.txtTotalResumen);
+
+        // Botones de navegación y confirmación.
+        Button btnVolverReserva =
+                findViewById(R.id.btnVolverReserva);
+
+        Button btnConfirmarReserva =
+                findViewById(R.id.btnConfirmarReserva);
 
         /*
-         * Recibe los datos enviados desde MainActivity mediante Intent extras.
+         * Recupera todos los datos enviados desde MainActivity:
+         * cliente y detalle de la reserva.
          */
         Intent intentRecibido = getIntent();
 
-        String servicio = intentRecibido.getStringExtra("SERVICIO");
-        String precio = intentRecibido.getStringExtra("PRECIO");
-        String fecha = intentRecibido.getStringExtra("FECHA");
-        String horario = intentRecibido.getStringExtra("HORARIO");
+        String nombreCliente =
+                intentRecibido.getStringExtra("NOMBRE_CLIENTE");
+
+        String dniCliente =
+                intentRecibido.getStringExtra("DNI_CLIENTE");
+
+        String telefonoCliente =
+                intentRecibido.getStringExtra("TELEFONO_CLIENTE");
+
+        String servicio =
+                intentRecibido.getStringExtra("SERVICIO");
+
+        String precio =
+                intentRecibido.getStringExtra("PRECIO");
+
+        String fecha =
+                intentRecibido.getStringExtra("FECHA");
+
+        String horario =
+                intentRecibido.getStringExtra("HORARIO");
 
         /*
-         * Valores de respaldo.
-         * Evitan que la pantalla se vea vacía si se abre directamente
-         * durante una prueba.
+         * Valores de respaldo para evitar que la pantalla quede vacía
+         * si se abre directamente desde Android Studio durante una prueba.
          */
-        if (servicio == null) {
+        if (nombreCliente == null || nombreCliente.isEmpty()) {
+            nombreCliente = getString(R.string.valor_cliente_ejemplo);
+        }
+
+        if (dniCliente == null || dniCliente.isEmpty()) {
+            dniCliente = getString(R.string.valor_dni_ejemplo);
+        }
+
+        if (telefonoCliente == null || telefonoCliente.isEmpty()) {
+            telefonoCliente = getString(R.string.valor_telefono_ejemplo);
+        }
+
+        if (servicio == null || servicio.isEmpty()) {
             servicio = getString(R.string.valor_servicio_ejemplo);
         }
 
-        if (precio == null) {
+        if (precio == null || precio.isEmpty()) {
             precio = getString(R.string.valor_total_ejemplo);
         }
 
-        if (fecha == null) {
+        if (fecha == null || fecha.isEmpty()) {
             fecha = getString(R.string.valor_fecha_ejemplo);
         }
 
-        if (horario == null) {
+        if (horario == null || horario.isEmpty()) {
             horario = getString(R.string.valor_horario_ejemplo);
         }
 
-        // Se muestran los datos reales elegidos por el usuario.
+        // Muestra todos los datos en la pantalla.
+        txtNombreClienteResumen.setText(nombreCliente);
+        txtDniClienteResumen.setText(dniCliente);
+        txtTelefonoClienteResumen.setText(telefonoCliente);
+
         txtServicioResumen.setText(servicio);
         txtFechaResumen.setText(fecha);
         txtHorarioResumen.setText(horario);
         txtTotalResumen.setText(precio);
 
         /*
-         * Copias finales para poder utilizar los datos dentro
-         * del evento del botón Confirmar reserva.
+         * Copias finales para poder usar los valores dentro
+         * del evento Confirmar reserva.
          */
+        final String nombreFinal = nombreCliente;
+        final String dniFinal = dniCliente;
+        final String telefonoFinal = telefonoCliente;
+
         final String servicioFinal = servicio;
         final String precioFinal = precio;
         final String fechaFinal = fecha;
         final String horarioFinal = horario;
 
-        /*
-         * Regresa a la pantalla de reserva para modificar
-         * fecha, horario o servicio.
-         */
+        // Regresa a Reserva para modificar las elecciones.
         btnVolverReserva.setOnClickListener(v -> finish());
 
         /*
-         * Guarda el turno confirmado y abre la pantalla Mis turnos.
+         * Guarda el turno completo y abre Mis turnos.
          */
         btnConfirmarReserva.setOnClickListener(v -> {
 
             boolean turnoGuardado = guardarTurno(
+                    nombreFinal,
+                    dniFinal,
+                    telefonoFinal,
                     servicioFinal,
                     precioFinal,
                     fechaFinal,
@@ -118,23 +173,20 @@ public class ResumenTurnoActivity extends AppCompatActivity {
 
                 startActivity(intentMisTurnos);
 
-                /*
-                 * Evita que, después de confirmar, el usuario vuelva
-                 * al resumen con el botón físico de atrás.
-                 */
+                // Evita volver al resumen después de confirmar.
                 finish();
             }
         });
     }
 
     /*
-     * Guarda un nuevo turno dentro de SharedPreferences.
-     *
-     * Se utiliza un JSONArray porque permite conservar más de un turno.
-     * Cada turno se guarda como un JSONObject con servicio, precio,
-     * fecha y horario.
+     * Guarda un turno completo dentro de SharedPreferences.
+     * Incluye la información del cliente y de la reserva.
      */
     private boolean guardarTurno(
+            String nombreCliente,
+            String dniCliente,
+            String telefonoCliente,
             String servicio,
             String precio,
             String fecha,
@@ -145,23 +197,31 @@ public class ResumenTurnoActivity extends AppCompatActivity {
                 MODE_PRIVATE
         );
 
-        String turnosJson = preferencias.getString(KEY_TURNOS, "[]");
+        String turnosJson = preferencias.getString(
+                KEY_TURNOS,
+                "[]"
+        );
 
         try {
-            // Recupera los turnos existentes o crea una lista vacía.
+            // Recupera la lista existente de turnos.
             JSONArray listaTurnos = new JSONArray(turnosJson);
 
-            // Crea el nuevo turno que se agregará a la lista.
+            // Crea el nuevo turno.
             JSONObject nuevoTurno = new JSONObject();
+
+            nuevoTurno.put("nombreCliente", nombreCliente);
+            nuevoTurno.put("dniCliente", dniCliente);
+            nuevoTurno.put("telefonoCliente", telefonoCliente);
+
             nuevoTurno.put("servicio", servicio);
             nuevoTurno.put("precio", precio);
             nuevoTurno.put("fecha", fecha);
             nuevoTurno.put("horario", horario);
 
-            // Agrega el turno nuevo sin borrar los anteriores.
+            // Agrega el turno sin borrar los anteriores.
             listaTurnos.put(nuevoTurno);
 
-            // Guarda nuevamente toda la lista actualizada.
+            // Guarda la lista actualizada localmente.
             preferencias.edit()
                     .putString(KEY_TURNOS, listaTurnos.toString())
                     .apply();
@@ -169,10 +229,6 @@ public class ResumenTurnoActivity extends AppCompatActivity {
             return true;
 
         } catch (JSONException e) {
-            /*
-             * Si hubiera un problema al crear o leer el JSON,
-             * se informa y no se abre la pantalla de turnos.
-             */
             Toast.makeText(
                     this,
                     "No se pudo guardar el turno. Intentá nuevamente.",

@@ -47,5 +47,31 @@
     <string name="titulo_estado_vacio">Todavía no tenés turnos confirmados</string>
     <string name="descripcion_estado_vacio">Cuando confirmes una reserva, aparecerá aquí con todos sus datos.</string>
     <string name="titulo_lista_turnos">PRÓXIMAS RESERVAS</string>
+    <!-- Textos de la pantalla Datos del cliente -->
+    <string name="titulo_datos_cliente">DATOS DEL CLIENTE</string>
+    <string name="subtitulo_datos_cliente">Completá tus datos para asignar correctamente el turno.</string>
 
+    <string name="etiqueta_nombre">Nombre y apellido</string>
+    <string name="hint_nombre">Ejemplo: Manuel Lopez</string>
+
+    <string name="etiqueta_dni">DNI</string>
+    <string name="hint_dni">Ejemplo: 12345678</string>
+
+    <string name="etiqueta_telefono">Teléfono</string>
+    <string name="hint_telefono">Ejemplo: 11 1234-5678</string>
+
+    <string name="boton_continuar_reserva">Continuar con la reserva</string>
+    <string name="mensaje_error_datos_cliente">Completá nombre, DNI y teléfono correctamente.</string>
+    <!-- Datos del cliente dentro del resumen y de Mis turnos -->
+    <string name="etiqueta_cliente">Cliente</string>
+
+    <string name="valor_cliente_ejemplo">Cliente de ejemplo</string>
+    <string name="valor_dni_ejemplo">12345678</string>
+    <string name="valor_telefono_ejemplo">11 1234-5678</string>
+
+    <string name="detalle_cliente_turno">Cliente: %1$s\nDNI: %2$s · Teléfono: %3$s</string>
+    <string name="detalle_fecha_horario_turno">Fecha: %1$s · %2$s hs</string>
+    <string name="detalle_total_turno">Total: %1$s</string>
+
+    <string name="boton_cancelar_turno">Cancelar turno</string>
 </resources>

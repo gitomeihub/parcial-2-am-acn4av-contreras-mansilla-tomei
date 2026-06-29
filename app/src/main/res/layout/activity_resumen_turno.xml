@@ -94,6 +94,66 @@
                 android:orientation="vertical"
                 android:padding="22dp">
 
+                <!-- Datos de la persona a la que se asignará el turno -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/etiqueta_cliente"
+                    android:textColor="@color/barber_color_texto_secundario"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtNombreClienteResumen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/valor_cliente_ejemplo"
+                    android:textColor="@color/barber_color_texto"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/etiqueta_dni"
+                    android:textColor="@color/barber_color_texto_secundario"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtDniClienteResumen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/valor_dni_ejemplo"
+                    android:textColor="@color/barber_color_texto"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/etiqueta_telefono"
+                    android:textColor="@color/barber_color_texto_secundario"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtTelefonoClienteResumen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/valor_telefono_ejemplo"
+                    android:textColor="@color/barber_color_texto"
+                    android:textSize="17sp" />
+
+                <!-- Separador entre datos del cliente y datos del servicio -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@color/gris_oscuro" />
+
                 <!-- Servicio elegido -->
                 <TextView
                     android:layout_width="wrap_content"
