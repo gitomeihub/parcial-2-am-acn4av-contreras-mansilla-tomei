@@ -12,7 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Barberia"
         tools:targetApi="31">
-
+        <activity
+            android:name=".MisTurnosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ResumenTurnoActivity"
+            android:exported="false" />
         <!--
             Pantalla inicial de la aplicación.
             Tiene el intent-filter MAIN/LAUNCHER porque será la primera
@@ -21,14 +26,12 @@
         <activity
             android:name=".InicioActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <!--
             Pantalla de reserva creada en el TP1.
             Se abre desde InicioActivity al tocar "Reservar turno".
@@ -36,7 +39,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-
     </application>
 
 </manifest>

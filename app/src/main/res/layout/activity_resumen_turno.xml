@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/barber_color_fondo"
+    tools:context=".ResumenTurnoActivity">
+
+    <!-- Línea decorativa superior para mantener la identidad visual -->
+    <View
+        android:id="@+id/vistaDoradaResumen"
+        android:layout_width="0dp"
+        android:layout_height="6dp"
+        android:background="@color/barber_color_dorado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Permite desplazarse si la pantalla del dispositivo es pequeña -->
+    <ScrollView
+        android:id="@+id/scrollResumen"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vistaDoradaResumen">
+
+        <!-- Contenedor vertical de todos los elementos -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="28dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Permite regresar a la pantalla de reserva para modificar una elección -->
+            <Button
+                android:id="@+id/btnVolverReserva"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_gravity="start"
+                android:backgroundTint="@color/gris_oscuro"
+                android:text="@string/boton_volver_reserva"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <!-- Título principal de la pantalla -->
+            <TextView
+                android:id="@+id/txtTituloResumen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:gravity="center"
+                android:letterSpacing="0.06"
+                android:text="@string/titulo_resumen_turno"
+                android:textColor="@color/barber_color_dorado"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <!-- Separador decorativo -->
+            <View
+                android:layout_width="68dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/barber_color_dorado" />
+
+            <!-- Breve explicación de la pantalla -->
+            <TextView
+                android:id="@+id/txtSubtituloResumen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="26dp"
+                android:gravity="center"
+                android:text="@string/subtitulo_resumen_turno"
+                android:textColor="@color/barber_color_texto_secundario"
+                android:textSize="15sp" />
+
+            <!-- Tarjeta que mostrará los datos del turno -->
+            <LinearLayout
+                android:id="@+id/cardResumenTurno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/barber_color_tarjeta"
+                android:orientation="vertical"
+                android:padding="22dp">
+
+                <!-- Servicio elegido -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/etiqueta_servicio"
+                    android:textColor="@color/barber_color_texto_secundario"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtServicioResumen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/valor_servicio_ejemplo"
+                    android:textColor="@color/barber_color_texto"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+                <!-- Separador -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@color/gris_oscuro" />
+
+                <!-- Fecha elegida -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/etiqueta_fecha"
+                    android:textColor="@color/barber_color_texto_secundario"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtFechaResumen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/valor_fecha_ejemplo"
+                    android:textColor="@color/barber_color_texto"
+                    android:textSize="18sp" />
+
+                <!-- Separador -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@color/gris_oscuro" />
+
+                <!-- Horario elegido -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/etiqueta_horario"
+                    android:textColor="@color/barber_color_texto_secundario"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtHorarioResumen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/valor_horario_ejemplo"
+                    android:textColor="@color/barber_color_texto"
+                    android:textSize="18sp" />
+
+                <!-- Separador -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@color/gris_oscuro" />
+
+                <!-- Importe total -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/etiqueta_total"
+                    android:textColor="@color/barber_color_texto_secundario"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtTotalResumen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/valor_total_ejemplo"
+                    android:textColor="@color/barber_color_dorado"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Botón principal para confirmar la reserva -->
+            <Button
+                android:id="@+id/btnConfirmarReserva"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginTop="28dp"
+                android:backgroundTint="@color/barber_color_dorado"
+                android:text="@string/boton_confirmar_reserva"
+                android:textAllCaps="false"
+                android:textColor="@color/barber_color_fondo"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <!-- Texto final informativo -->
+            <TextView
+                android:id="@+id/txtFooterResumen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:gravity="center"
+                android:text="@string/footer_resumen"
+                android:textColor="@color/barber_color_texto_secundario"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

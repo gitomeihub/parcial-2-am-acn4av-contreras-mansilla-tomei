@@ -17,4 +17,35 @@
     <!-- Texto del botón para regresar a la pantalla principal -->
     <string name="boton_volver_inicio">← Volver al inicio</string>
 
+    <!-- Mensajes de la pantalla de reserva -->
+    <string name="mensaje_seleccion_incompleta">Seleccioná una fecha, un horario y un servicio para continuar.</string>
+    <string name="resumen_turno_temporal">Turno seleccionado:\nServicio: %1$s\nFecha: %2$s\nHorario: %3$s\nTotal: %4$s</string>
+
+    <!-- Textos de la pantalla Resumen de turno -->
+    <string name="boton_volver_reserva">← Volver a reservar</string>
+    <string name="titulo_resumen_turno">RESUMEN DE TU TURNO</string>
+    <string name="subtitulo_resumen_turno">Revisá los datos antes de confirmar tu reserva.</string>
+
+    <string name="etiqueta_servicio">Servicio seleccionado</string>
+    <string name="etiqueta_fecha">Fecha</string>
+    <string name="etiqueta_horario">Horario</string>
+    <string name="etiqueta_total">Total a pagar</string>
+
+    <!-- Valores temporales de ejemplo para diseñar la pantalla -->
+    <string name="valor_servicio_ejemplo">Corte + Barba</string>
+    <string name="valor_fecha_ejemplo">Jueves 16</string>
+    <string name="valor_horario_ejemplo">15:00 hs</string>
+    <string name="valor_total_ejemplo">$14.000</string>
+
+    <string name="boton_confirmar_reserva">Confirmar reserva</string>
+    <string name="footer_resumen">Al confirmar, tu turno quedará registrado.</string>
+    <string name="mensaje_turno_confirmado">¡Turno reservado con éxito!</string>
+
+    <!-- Textos de la pantalla Mis turnos -->
+    <string name="titulo_mis_turnos">MIS TURNOS</string>
+    <string name="subtitulo_mis_turnos">Consultá y administrá tus próximas reservas.</string>
+    <string name="titulo_estado_vacio">Todavía no tenés turnos confirmados</string>
+    <string name="descripcion_estado_vacio">Cuando confirmes una reserva, aparecerá aquí con todos sus datos.</string>
+    <string name="titulo_lista_turnos">PRÓXIMAS RESERVAS</string>
+
 </resources>
