@@ -74,4 +74,10 @@
     <string name="detalle_total_turno">Total: %1$s</string>
 
     <string name="boton_cancelar_turno">Cancelar turno</string>
+    <!-- Textos relacionados con el método de pago -->
+    <string name="etiqueta_medio_pago">Método de pago</string>
+    <string name="opcion_efectivo">Efectivo al asistir</string>
+    <string name="opcion_transferencia">Transferencia bancaria</string>
+    <string name="opcion_mercado_pago">Mercado Pago</string>
+    <string name="mensaje_error_medio_pago">Seleccioná un método de pago para continuar.</string>
 </resources>

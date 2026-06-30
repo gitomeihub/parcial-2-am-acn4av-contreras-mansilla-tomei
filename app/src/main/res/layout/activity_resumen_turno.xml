@@ -248,6 +248,59 @@
                     android:textSize="23sp"
                     android:textStyle="bold" />
 
+                <!-- Separador entre total y método de pago -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@color/gris_oscuro" />
+
+                <!-- Título de la sección de pago -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/etiqueta_medio_pago"
+                    android:textColor="@color/barber_color_texto_secundario"
+                    android:textSize="14sp" />
+
+                <!-- Grupo: permite elegir solo una opción -->
+                <RadioGroup
+                    android:id="@+id/radioGroupMedioPago"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rbEfectivo"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:buttonTint="@color/barber_color_dorado"
+                        android:text="@string/opcion_efectivo"
+                        android:textColor="@color/barber_color_texto"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbTransferencia"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:buttonTint="@color/barber_color_dorado"
+                        android:text="@string/opcion_transferencia"
+                        android:textColor="@color/barber_color_texto"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/rbMercadoPago"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:buttonTint="@color/barber_color_dorado"
+                        android:text="@string/opcion_mercado_pago"
+                        android:textColor="@color/barber_color_texto"
+                        android:textSize="16sp" />
+
+                </RadioGroup>
+
             </LinearLayout>
 
             <!-- Botón principal para confirmar la reserva -->

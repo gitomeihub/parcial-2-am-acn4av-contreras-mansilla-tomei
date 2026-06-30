@@ -1,5 +1,5 @@
 package com.example.barberia;
-
+import android.widget.RadioGroup;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup;
 
 public class ResumenTurnoActivity extends AppCompatActivity {
 
@@ -58,6 +60,9 @@ public class ResumenTurnoActivity extends AppCompatActivity {
 
         Button btnConfirmarReserva =
                 findViewById(R.id.btnConfirmarReserva);
+        // Grupo que contiene las opciones de método de pago.
+        RadioGroup radioGroupMedioPago =
+                findViewById(R.id.radioGroupMedioPago);
 
         /*
          * Recupera todos los datos enviados desde MainActivity:
@@ -148,6 +153,19 @@ public class ResumenTurnoActivity extends AppCompatActivity {
          * Guarda el turno completo y abre Mis turnos.
          */
         btnConfirmarReserva.setOnClickListener(v -> {
+            /*
+             * Verifica que el usuario haya seleccionado una opción de pago
+             * antes de confirmar el turno.
+             */
+            if (radioGroupMedioPago.getCheckedRadioButtonId() == -1) {
+                Toast.makeText(
+                        ResumenTurnoActivity.this,
+                        getString(R.string.mensaje_error_medio_pago),
+                        Toast.LENGTH_LONG
+                ).show();
+
+                return;
+            }
 
             boolean turnoGuardado = guardarTurno(
                     nombreFinal,
