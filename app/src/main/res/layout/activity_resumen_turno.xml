@@ -248,7 +248,7 @@
                     android:textSize="23sp"
                     android:textStyle="bold" />
 
-                <!-- Separador entre total y método de pago -->
+                <!-- Separador entre el total y las opciones de pago -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -264,7 +264,7 @@
                     android:textColor="@color/barber_color_texto_secundario"
                     android:textSize="14sp" />
 
-                <!-- Grupo: permite elegir solo una opción -->
+                <!-- Permite seleccionar solamente un método de pago -->
                 <RadioGroup
                     android:id="@+id/radioGroupMedioPago"
                     android:layout_width="match_parent"

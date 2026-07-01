@@ -80,4 +80,5 @@
     <string name="opcion_transferencia">Transferencia bancaria</string>
     <string name="opcion_mercado_pago">Mercado Pago</string>
     <string name="mensaje_error_medio_pago">Seleccioná un método de pago para continuar.</string>
+    <string name="detalle_pago_turno">Pago: %1$s\nEstado: Pendiente de pago</string>
 </resources>

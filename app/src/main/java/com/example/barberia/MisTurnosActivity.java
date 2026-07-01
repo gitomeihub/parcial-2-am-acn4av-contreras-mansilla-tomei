@@ -112,7 +112,7 @@ public class MisTurnosActivity extends AppCompatActivity {
                 /*
                  * optString permite que también se puedan leer
                  * turnos viejos que se hubieran guardado antes
-                 * de agregar los datos del cliente.
+                 * de agregar datos del cliente o medio de pago.
                  */
                 String nombreCliente = turno.optString(
                         "nombreCliente",
@@ -135,6 +135,16 @@ public class MisTurnosActivity extends AppCompatActivity {
                 String horario = turno.optString("horario", "");
 
                 /*
+                 * Recupera el medio de pago.
+                 * Los turnos creados antes de esta mejora mostrarán
+                 * "No informado" en lugar de romper la app.
+                 */
+                String medioPago = turno.optString(
+                        "medioPago",
+                        "No informado"
+                );
+
+                /*
                  * Se conserva el índice del turno para poder eliminar
                  * exactamente la reserva seleccionada.
                  */
@@ -148,6 +158,7 @@ public class MisTurnosActivity extends AppCompatActivity {
                         precio,
                         fecha,
                         horario,
+                        medioPago,
                         indiceTurno
                 );
             }
@@ -175,6 +186,7 @@ public class MisTurnosActivity extends AppCompatActivity {
             String precio,
             String fecha,
             String horario,
+            String medioPago,
             int indiceTurno
     ) {
         // Contenedor principal de la tarjeta.
@@ -277,6 +289,31 @@ public class MisTurnosActivity extends AppCompatActivity {
         parametrosPrecio.setMargins(0, dp(12), 0, 0);
         txtPrecio.setLayoutParams(parametrosPrecio);
 
+        /*
+         * Muestra el método elegido y deja claro que el pago
+         * todavía se realiza o confirma al asistir.
+         */
+        TextView txtMedioPago = new TextView(this);
+
+        txtMedioPago.setText(
+                getString(
+                        R.string.detalle_pago_turno,
+                        medioPago
+                )
+        );
+
+        txtMedioPago.setTextColor(Color.parseColor("#C8C8C8"));
+        txtMedioPago.setTextSize(14);
+
+        LinearLayout.LayoutParams parametrosMedioPago =
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+
+        parametrosMedioPago.setMargins(0, dp(12), 0, 0);
+        txtMedioPago.setLayoutParams(parametrosMedioPago);
+
         // Botón para cancelar solamente este turno.
         Button btnCancelarTurno = new Button(this);
 
@@ -315,6 +352,7 @@ public class MisTurnosActivity extends AppCompatActivity {
         tarjetaTurno.addView(txtCliente);
         tarjetaTurno.addView(txtFechaHorario);
         tarjetaTurno.addView(txtPrecio);
+        tarjetaTurno.addView(txtMedioPago);
         tarjetaTurno.addView(btnCancelarTurno);
 
         // Agrega la tarjeta a la lista dinámica de turnos.

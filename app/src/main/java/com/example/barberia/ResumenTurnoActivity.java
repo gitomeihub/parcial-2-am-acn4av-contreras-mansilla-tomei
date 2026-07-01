@@ -1,9 +1,11 @@
 package com.example.barberia;
-import android.widget.RadioGroup;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,8 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup;
 
 public class ResumenTurnoActivity extends AppCompatActivity {
 
@@ -60,7 +60,11 @@ public class ResumenTurnoActivity extends AppCompatActivity {
 
         Button btnConfirmarReserva =
                 findViewById(R.id.btnConfirmarReserva);
-        // Grupo que contiene las opciones de método de pago.
+
+        /*
+         * Grupo de opciones de pago.
+         * Este ID se agregará en activity_resumen_turno.xml.
+         */
         RadioGroup radioGroupMedioPago =
                 findViewById(R.id.radioGroupMedioPago);
 
@@ -134,7 +138,7 @@ public class ResumenTurnoActivity extends AppCompatActivity {
         txtTotalResumen.setText(precio);
 
         /*
-         * Copias finales para poder usar los valores dentro
+         * Copias finales para usar los valores dentro
          * del evento Confirmar reserva.
          */
         final String nombreFinal = nombreCliente;
@@ -150,12 +154,13 @@ public class ResumenTurnoActivity extends AppCompatActivity {
         btnVolverReserva.setOnClickListener(v -> finish());
 
         /*
-         * Guarda el turno completo y abre Mis turnos.
+         * Valida el método de pago, guarda el turno completo
+         * y abre la pantalla Mis turnos.
          */
         btnConfirmarReserva.setOnClickListener(v -> {
+
             /*
-             * Verifica que el usuario haya seleccionado una opción de pago
-             * antes de confirmar el turno.
+             * Verifica que el usuario haya elegido una forma de pago.
              */
             if (radioGroupMedioPago.getCheckedRadioButtonId() == -1) {
                 Toast.makeText(
@@ -167,6 +172,18 @@ public class ResumenTurnoActivity extends AppCompatActivity {
                 return;
             }
 
+            /*
+             * Obtiene el texto de la opción elegida:
+             * Efectivo, Transferencia o Mercado Pago.
+             */
+            RadioButton radioPagoSeleccionado = findViewById(
+                    radioGroupMedioPago.getCheckedRadioButtonId()
+            );
+
+            String medioPago = radioPagoSeleccionado
+                    .getText()
+                    .toString();
+
             boolean turnoGuardado = guardarTurno(
                     nombreFinal,
                     dniFinal,
@@ -174,7 +191,8 @@ public class ResumenTurnoActivity extends AppCompatActivity {
                     servicioFinal,
                     precioFinal,
                     fechaFinal,
-                    horarioFinal
+                    horarioFinal,
+                    medioPago
             );
 
             if (turnoGuardado) {
@@ -199,7 +217,7 @@ public class ResumenTurnoActivity extends AppCompatActivity {
 
     /*
      * Guarda un turno completo dentro de SharedPreferences.
-     * Incluye la información del cliente y de la reserva.
+     * Incluye cliente, reserva y método de pago.
      */
     private boolean guardarTurno(
             String nombreCliente,
@@ -208,7 +226,8 @@ public class ResumenTurnoActivity extends AppCompatActivity {
             String servicio,
             String precio,
             String fecha,
-            String horario
+            String horario,
+            String medioPago
     ) {
         SharedPreferences preferencias = getSharedPreferences(
                 PREFS_NAME,
@@ -235,6 +254,9 @@ public class ResumenTurnoActivity extends AppCompatActivity {
             nuevoTurno.put("precio", precio);
             nuevoTurno.put("fecha", fecha);
             nuevoTurno.put("horario", horario);
+
+            // Guarda también el método de pago seleccionado.
+            nuevoTurno.put("medioPago", medioPago);
 
             // Agrega el turno sin borrar los anteriores.
             listaTurnos.put(nuevoTurno);
