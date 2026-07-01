@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1074683485065",
+    "project_id": "turnero-barberia-c08dd",
+    "storage_bucket": "turnero-barberia-c08dd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074683485065:android:a4895381507d5136c61f58",
+        "android_client_info": {
+          "package_name": "com.example.barberia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkc0q66C_A1jwYaJjl2yafXmjyf_HxZBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

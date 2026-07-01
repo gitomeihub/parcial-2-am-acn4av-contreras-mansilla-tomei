@@ -14,9 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResumenTurnoActivity extends AppCompatActivity {
-
+    private FirebaseFirestore db;
     /*
      * Constantes utilizadas para guardar y recuperar los turnos
      * desde SharedPreferences.
@@ -30,6 +34,8 @@ public class ResumenTurnoActivity extends AppCompatActivity {
 
         // Vincula esta activity con activity_resumen_turno.xml.
         setContentView(R.layout.activity_resumen_turno);
+
+        db = FirebaseFirestore.getInstance();
 
         // Referencias a los datos del cliente.
         TextView txtNombreClienteResumen =
@@ -194,23 +200,43 @@ public class ResumenTurnoActivity extends AppCompatActivity {
                     horarioFinal,
                     medioPago
             );
-
             if (turnoGuardado) {
-                Toast.makeText(
-                        ResumenTurnoActivity.this,
-                        getString(R.string.mensaje_turno_confirmado),
-                        Toast.LENGTH_SHORT
-                ).show();
+                // 1. Armamos el paquete de datos para Firebase usando las variables reales
+                Map<String, Object> turno = new HashMap<>();
+                turno.put("servicio", servicioFinal);
+                turno.put("fecha", fechaFinal);
+                turno.put("hora", horarioFinal);
+                turno.put("metodoPago", medioPago);
+                turno.put("estado", "Reservado");
+                turno.put("fechaCreacion", FieldValue.serverTimestamp());
 
-                Intent intentMisTurnos = new Intent(
-                        ResumenTurnoActivity.this,
-                        MisTurnosActivity.class
-                );
+                // 2. Lo enviamos a la colección "turnos" en la nube
+                db.collection("turnos")
+                        .add(turno)
+                        .addOnSuccessListener(documentReference -> {
+                            // 3. Si Firebase guardó bien, mostramos el mensaje y cambiamos de pantalla (el código de tus compañeras)
+                            Toast.makeText(
+                                    ResumenTurnoActivity.this,
+                                    getString(R.string.mensaje_turno_confirmado),
+                                    Toast.LENGTH_SHORT
+                            ).show();
 
-                startActivity(intentMisTurnos);
+                            Intent intentMisTurnos = new Intent(
+                                    ResumenTurnoActivity.this,
+                                    MisTurnosActivity.class
+                            );
 
-                // Evita volver al resumen después de confirmar.
-                finish();
+                            startActivity(intentMisTurnos);
+                            finish();
+                        })
+                        .addOnFailureListener(e -> {
+                            // 4. Si falla la subida, avisamos
+                            Toast.makeText(
+                                    ResumenTurnoActivity.this,
+                                    "No se pudo guardar el turno en la nube",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        });
             }
         });
     }
